@@ -25,131 +25,75 @@ O estudo percorre desde a importação e limpeza da base até a aplicação de f
 
 ---
 
-1️⃣ Importação da base de dados
+Isso garante:
+- Syntax highlight correto
+- Leitura profissional
+- Boa visualização para recrutadores
 
-Nesta etapa, a base de dados é carregada utilizando Pandas.
+---
 
+## 📄 README.md (com código Python corretamente formatado)
+
+```markdown
+# 📊 Análise de Dados – Cancelamento de Clientes (Churn)
+
+Este projeto realiza uma **Análise Exploratória de Dados (EDA)** com foco em **cancelamento de clientes (churn)**, utilizando Python e bibliotecas de análise e visualização de dados.
+
+---
+
+## 🧰 Tecnologias Utilizadas
+
+- Python
+- Pandas
+- Plotly Express
+- Jupyter Notebook
+
+---
+
+## 🧠 Etapas da Análise e Código
+
+### 1️⃣ Importação das bibliotecas e base de dados
+
+```python
 import pandas as pd
 import plotly.express as px
 
 tabela = pd.read_csv("cancelamentos.csv")
 display(tabela)
 
-
-pd.read_csv() importa a base de dados
-
-display() permite uma visualização inicial do dataset
-
-2️⃣ Visualização inicial e remoção de colunas irrelevantes
-
-Após a importação, é realizada uma avaliação das colunas disponíveis, removendo informações que não agregam valor à análise.
-
 tabela = tabela.drop(columns="CustomerID")
 display(tabela)
 
-
-A coluna CustomerID é removida por não contribuir para a análise de churn
-
-Reduz ruído e melhora a clareza do dataset
-
-3️⃣ Identificação e correção de problemas na base de dados
-
-Nesta fase, são analisados possíveis problemas como:
-
-Valores inconsistentes
-
-Dados nulos
-
-Tipos de dados incorretos
-
-# Identificar possíveis erros da base de dados
-
-
-Essa etapa é fundamental para garantir a qualidade da análise.
-
-4️⃣ Aplicação de filtros na base de dados
-
-A análise foca em perfis específicos de clientes, aplicando filtros relevantes.
-
-🔹 Filtro 1: Tipo de contrato
 condicao = tabela["duracao_contrato"] != "Monthly"
 tabela = tabela[condicao]
-
-
-Remove contratos mensais
-
-Mantém apenas contratos com maior prazo
-
-🔹 Filtro 2: Número de ligações para o call center
 condicao = tabela["ligacoes_callcenter"] <= 4
 tabela = tabela[condicao]
+px.histogram(
+    tabela,
+    x="cancelou",
+    color="duracao_contrato",
+    title="Cancelamento de clientes por tipo de contrato"
+)
+```
 
+📊 Estrutura da Base de Dados
+Coluna	Descrição
+cancelou	Indica se o cliente cancelou
+duracao_contrato	Tipo de contrato
+ligacoes_callcenter	Quantidade de ligações
+dias_atraso	Dias de atraso
+⚠️ Observações
 
-Mantém clientes com até 4 ligações
+Projeto com foco educacional e de portfólio
 
-Ajuda a identificar padrões de comportamento menos críticos
-
-🔹 Filtro 3: Dias de atraso
-# Dias de atraso menor ou igual
-
-
-Reduz distorções causadas por clientes com alto índice de inadimplência
-
-Permite análises mais equilibradas
-
-5️⃣ Análise exploratória e visualização dos dados
-
-Após o tratamento e filtragem, são criadas visualizações para identificar padrões e tendências.
-
-px.histogram(tabela, x="cancelou", color="duracao_contrato")
-
-
-Uso de gráficos interativos
-
-Comparação entre clientes cancelados e ativos
-
-Identificação de variáveis com maior impacto no churn
-
-📊 Principais Insights (Exemplo)
-
-Clientes com maior número de ligações ao call center tendem a cancelar mais
-
-Contratos mensais apresentam maior taxa de churn
-
-Atrasos recorrentes estão associados ao cancelamento
-
-(Os insights podem variar conforme a análise final)
-
-⚠️ Observações Importantes
-
-Projeto desenvolvido para fins educacionais e demonstrativos
-
-A análise pode ser expandida com modelos preditivos
+A análise pode ser expandida para modelos preditivos
 
 A qualidade dos dados impacta diretamente os resultados
-
-📈 Possíveis Evoluções do Projeto
-
-Criação de modelo preditivo de churn
-
-Aplicação de Machine Learning
-
-Feature engineering
-
-Análise de correlação
-
-Dashboard interativo
-
-Deploy do projeto
 
 👨‍💻 Autor
 
 Jorge Ferreira
-Analista de Dados | Python | Análise de Dados | BI
-
-Projeto desenvolvido para estudo, prática e composição de portfólio profissional.
-
-
+Analista de Dados | Python | Análise de Dados
 
 
 
